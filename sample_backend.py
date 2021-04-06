@@ -42,12 +42,22 @@ def hello_world():
 def get_users():
     if request.method == 'GET':
         search_username = request.args.get('name')
-        if search_username:
-            subdict ={'users_list' : []}
+        search_userjob = request.args.get('job')
+
+        if search_username and not search_userjob:
+            subdict = {'users_list' : []}
             for user in users['users_list']:
                 if user['name'] == search_username:
                     subdict['users_list'].append(user)
 
+            return subdict
+        
+        elif search_username and search_userjob:
+            subdict = {'users_list' : []}
+            for user in users['users_list']:
+                if user['name'] == search_username and user['job'] == search_userjob:
+                    subdict['users_list'].append(user)
+            
             return subdict
     
         return users
