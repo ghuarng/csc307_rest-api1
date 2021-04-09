@@ -83,7 +83,7 @@ def get_users():
 
         #Insert new user
         users['users_list'].append(userToAdd)
-        resp = jsonify(success=True)
+        resp = jsonify(userToAdd)
         resp.status_code = 201
         return resp
 
