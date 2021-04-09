@@ -100,9 +100,13 @@ def get_user(id):
     
     elif request.method == 'DELETE':
         if id:
+            resp = jsonify("User " + id + " not found")
+            resp.status_code = 404
+
             for user in users['users_list']:
                 if user['id'] == id:
                     users['users_list'].remove(user)
-                    return 'User ' + id + ' deleted'
-            
-            return 'User ' + id + ' not found'
+                    resp = jsonify("User " + id + " deleted")
+                    resp.status_code = 204
+
+            return resp
